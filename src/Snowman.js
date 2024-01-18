@@ -84,6 +84,14 @@ function Snowman({
     ));
   }
 
+  /**resetGame: set state for the word and the number of guesses */
+  function resetGame () {
+    setAnswer(randomWord(words));
+    setNWrong(0);
+    setGuessedLetters(() => new Set());
+  }
+
+
   return (
       <div className="Snowman">
         <img src={(images)[nWrong]} alt={nWrong} />
@@ -95,6 +103,7 @@ function Snowman({
             : `You lose, correct word is ${answer}`
           }
         </p>
+        <button className="Snowman-reset" onClick={resetGame}> RESET</button>
       </div>
   );
 }

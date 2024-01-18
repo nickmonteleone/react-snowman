@@ -5,6 +5,8 @@ import img0 from "./0.png";
 import img1 from "./1.png";
 import img2 from "./2.png";
 import img3 from "./3.png";
+import { randomWord } from "./words";
+
 
 const TEST_WORDS = ["TEST"];
 const TEST_MAX_GUESS = 3;
@@ -66,3 +68,10 @@ test("can't have more nWrong than maxWrong (with snapshot)", function () {
 
   expect(container).toMatchSnapshot();
 });
+
+test(
+  "reset button works by resetting nWrong, answer, and guessedLetters states",
+  function () {
+    //TODO: Mock randomWord to make sure word reset happens.
+
+})
