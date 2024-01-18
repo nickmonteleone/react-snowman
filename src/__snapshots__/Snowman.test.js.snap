@@ -24,7 +24,7 @@ exports[`can't have more nWrong than maxWrong (with snapshot) 1`] = `
       _
     </p>
     <p>
-      You lose, correct word is TEST
+      You lose, correct word is test
     </p>
     <button
       class="Snowman-reset"

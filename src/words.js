@@ -1610,8 +1610,10 @@ const ENGLISH_WORDS = [
   "naval",
 ];
 
-function randomWord(words) {
-  return words[Math.floor(Math.random() * words.length)];
+class randomWordGenerator {
+  static randomWord(words) {
+    return words[Math.floor(Math.random() * words.length)];
+  }
 }
 
-export { randomWord, ENGLISH_WORDS};
+export { randomWordGenerator, ENGLISH_WORDS};

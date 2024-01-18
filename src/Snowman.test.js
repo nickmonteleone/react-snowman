@@ -6,12 +6,18 @@ import img1 from "./1.png";
 import img2 from "./2.png";
 import img3 from "./3.png";
 
-import { randomWord } from "./words";
+import { randomWordGenerator } from "./words";
 
 
-const TEST_WORDS = ["TEST"];
+
+const TEST_WORDS = ["test"];
 const TEST_MAX_GUESS = 3;
 const TEST_IMAGES = [img0, img1, img2, img3];
+
+// randomWordGenerator.randomWord = jest.fn();
+// randomWordGenerator.randomWord .mockReturnValue('RESET')
+// console.log('randomWord', randomWordGenerator.randomWord (TEST_WORDS))
+
 
 test("renders without crashing", function () {
   render(
@@ -90,30 +96,26 @@ test(
 
     const nWrongText = container.querySelector('.Snowman-nWrong');
     expect(nWrongText).toContainHTML('Number wrong: 2');
-    // TODO: add comment and clarify that these are disabled letter buttons
     let disabledBtn = container.querySelector('button[disabled]');
     expect(disabledBtn).not.toEqual(null);
 
-    reset_test_words = ['RESET'];
+    randomWordGenerator.randomWord = jest.fn();
+    randomWordGenerator.randomWord.mockReturnValue('reset')
 
     const resetBtn = container.querySelector(".Snowman-reset");
     fireEvent.click(resetBtn);
 
-    // // TODO: Mock randomWord to make sure word reset happens.
-    // randomWord = jest.fn();
-    // randomWord.mockReturnValue('RESET')
-    // console.log('randomWord', randomWord(TEST_WORDS))
-    // jest.spyOn(randomWord).mockReturnValue('RESET');
-    // console.log('randomWord', randomWord(TEST_WORDS));
-
-    expect(nWrongText).toContainHTML('Number wrong: 0');
-
-    // const rButton = container.querySelector('button[value="r"]');
-    // fireEvent.click(rButton);
-
-    // expect(nWrongText).toContainHTML('Number wrong: 0');
-
 
     disabledBtn = container.querySelector('button[disabled]');
     expect(disabledBtn).toEqual(null);
+
+    expect(nWrongText).toContainHTML('Number wrong: 0');
+
+    // Checks that word is "reset" by guessing r and checking that 0 wrong
+    const rButton = container.querySelector('button[value="r"]');
+    fireEvent.click(rButton);
+
+    expect(nWrongText).toContainHTML('Number wrong: 0');
+
+
   });

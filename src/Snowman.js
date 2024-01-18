@@ -9,8 +9,7 @@ import img4 from "./4.png";
 import img5 from "./5.png";
 import img6 from "./6.png";
 
-import { randomWord, ENGLISH_WORDS } from "./words";
-
+import { randomWordGenerator, ENGLISH_WORDS } from "./words";
 
 /** Snowman game: plays hangman-style game with a melting snowman.
  *
@@ -35,7 +34,7 @@ function Snowman({
 
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
-  const [answer, setAnswer] = useState(randomWord(words));
+  const [answer, setAnswer] = useState(randomWordGenerator.randomWord(words));
 
   console.log('rendering Snowman');
   console.log('nWrong:', nWrong);
@@ -88,7 +87,7 @@ function Snowman({
   /**resetGame: set state for the word, nWrong, and the guessedletters */
   function resetGame () {
     // TODO: look up mocking set state
-    setAnswer(randomWord(words));
+    setAnswer(randomWordGenerator.randomWord(words));
     setNWrong(0);
     // TODO: this doesn't need arrow function
     setGuessedLetters(() => new Set());
