@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can't have more nWrong than maxWrong (with snapshot) 1`] = `
+<div>
+  <div
+    class="Snowman"
+  >
+    <img
+      alt="3"
+      src="3.png"
+    />
+    <p
+      class="Snowman-nWrong"
+    >
+      Number wrong: 
+      3
+    </p>
+    <p
+      class="Snowman-word"
+    >
+      _
+      _
+      _
+      _
+    </p>
+    <p>
+      You lose, correct word is TEST
+    </p>
+  </div>
+</div>
+`;

@@ -9,6 +9,8 @@ import img4 from "./4.png";
 import img5 from "./5.png";
 import img6 from "./6.png";
 
+import { randomWord, ENGLISH_WORDS } from "./words";
+
 
 /** Snowman game: plays hangman-style game with a melting snowman.
  *
@@ -16,6 +18,7 @@ import img6 from "./6.png";
  * - maxWrong: how many wrong moves is a player allowed?
  * - images: array of images for wrong guess
  * - words: array of words to pick answer from
+ *      (default english words from ./word.js)
  *
  * State:
  * - nWrong: # wrong guesses so far
@@ -25,18 +28,22 @@ import img6 from "./6.png";
 
 function Snowman({
       images=[img0, img1, img2, img3, img4, img5, img6],
-      words=["apple"],
+      words=ENGLISH_WORDS,
       maxWrong=6,
     }) {
   /** by default, allow 6 guesses and use provided gallows images. */
 
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
-  const [answer, setAnswer] = useState((words)[0]);
+  const [answer, setAnswer] = useState(randomWord(words));
 
   console.log('rendering Snowman');
   console.log('nWrong:', nWrong);
   console.log('guessedLetters', guessedLetters);
+  console.log('answer:', answer);
+
+  const lost = nWrong >= maxWrong;
+  console.log('has user lost:', lost);
 
   /** guessedWord: show current-state of word:
    if guessed letters are {a,p,e}, show "app_e" for "apple"
@@ -82,10 +89,14 @@ function Snowman({
         <img src={(images)[nWrong]} alt={nWrong} />
         <p className="Snowman-nWrong">Number wrong: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
-        <p>{generateButtons()}</p>
+        <p>
+          {!lost
+            ? generateButtons()
+            : `You lose, correct word is ${answer}`
+          }
+        </p>
       </div>
   );
 }
-
 
 export default Snowman;

@@ -1,16 +1,32 @@
 import { render, fireEvent } from "@testing-library/react";
 import Snowman from "./Snowman";
 
+import img0 from "./0.png";
+import img1 from "./1.png";
+import img2 from "./2.png";
+import img3 from "./3.png";
+
 const TEST_WORDS = ["TEST"];
 const TEST_MAX_GUESS = 3;
+const TEST_IMAGES = [img0, img1, img2, img3]
 
 test("renders without crashing", function () {
-  render (<Snowman words={TEST_WORDS} maxWrong={TEST_MAX_GUESS} />)
+  render (
+    <Snowman
+      images={TEST_IMAGES}
+      words={TEST_WORDS}
+      maxWrong={TEST_MAX_GUESS}
+    />
+  )
 });
 
 test("shows number wrong", function () {
   const { container } = render (
-    <Snowman words={TEST_WORDS} maxWrong={TEST_MAX_GUESS}/>
+    <Snowman
+      images={TEST_IMAGES}
+      words={TEST_WORDS}
+      maxWrong={TEST_MAX_GUESS}
+    />
   );
 
   const aButton = container.querySelector('button[value="a"]');
@@ -24,9 +40,13 @@ test("shows number wrong", function () {
   expect(nWrongText).toContainHTML('Number wrong: 2')
 });
 
-test("can't have more nWrong than maxWrong", function () {
+test("can't have more nWrong than maxWrong (with snapshot)", function () {
   const { container } = render (
-    <Snowman words={TEST_WORDS} maxWrong={TEST_MAX_GUESS}/>
+    <Snowman
+      images={TEST_IMAGES}
+      words={TEST_WORDS}
+      maxWrong={TEST_MAX_GUESS}
+    />
   );
 
   const aButton = container.querySelector('button[value="a"]');
@@ -42,5 +62,7 @@ test("can't have more nWrong than maxWrong", function () {
 
   expect(dButton).toEqual(null);
   expect(container).toContainHTML(`You lose, correct word is ${TEST_WORDS[0]}`);
-  expect(img).not.ßtoEqual(null);
+  expect(img).not.toEqual(null);
+
+  expect(container).toMatchSnapshot();
 });
