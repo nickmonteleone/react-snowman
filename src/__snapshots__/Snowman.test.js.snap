@@ -26,6 +26,11 @@ exports[`can't have more nWrong than maxWrong (with snapshot) 1`] = `
     <p>
       You lose, correct word is TEST
     </p>
+    <button
+      class="Snowman-reset"
+    >
+       RESET
+    </button>
   </div>
 </div>
 `;

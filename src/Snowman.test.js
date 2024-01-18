@@ -5,6 +5,7 @@ import img0 from "./0.png";
 import img1 from "./1.png";
 import img2 from "./2.png";
 import img3 from "./3.png";
+
 import { randomWord } from "./words";
 
 
@@ -72,6 +73,41 @@ test("can't have more nWrong than maxWrong (with snapshot)", function () {
 test(
   "reset button works by resetting nWrong, answer, and guessedLetters states",
   function () {
-    //TODO: Mock randomWord to make sure word reset happens.
+    const { container } = render (
+      <Snowman
+        images={TEST_IMAGES}
+        words={TEST_WORDS}
+        maxWrong={TEST_MAX_GUESS}
+      />
+    );
+
+    const aButton = container.querySelector('button[value="a"]');
+    const bButton = container.querySelector('button[value="b"]');
+    fireEvent.click(aButton);
+    fireEvent.click(bButton);
+
+    const nWrongText = container.querySelector('.Snowman-nWrong');
+    expect(nWrongText).toContainHTML('Number wrong: 2')
+
+    let disabledBtn = container.querySelector('button[disabled]')
+    expect(disabledBtn).not.toEqual(null);
+
+    const resetBtn = container.querySelector(".Snowman-reset");
+    fireEvent.click(resetBtn);
+
+    console.log('randomWord', randomWord(TEST_WORDS))
+
+    // TODO: Mock randomWord to make sure word reset happens.
+    // randomWord = jest.fn();
+    // randomWord.mockReturnValue('RESET')
+    // console.log('randomWord', randomWord(TEST_WORDS))
+
+
+    expect(nWrongText).toContainHTML('Number wrong: 0')
+
+    disabledBtn = container.querySelector('button[disabled]')
+    expect(disabledBtn).toEqual(null);
+
+
 
 })
