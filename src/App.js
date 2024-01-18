@@ -4,6 +4,12 @@ import Snowman from "./Snowman";
 
 /** App component for snowman
  *
+ * Props:
+ * - None
+ *
+ * States:
+ * - None
+ *
  * App -> Snowman
  */
 

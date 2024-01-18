@@ -42,6 +42,7 @@ function Snowman({
   console.log('guessedLetters', guessedLetters);
   console.log('answer:', answer);
 
+  //TODO: move to where we need it (dont need separate const)
   const lost = nWrong >= maxWrong;
   console.log('has user lost:', lost);
 
@@ -84,13 +85,14 @@ function Snowman({
     ));
   }
 
-  /**resetGame: set state for the word and the number of guesses */
+  /**resetGame: set state for the word, nWrong, and the guessedletters */
   function resetGame () {
+    // TODO: look up mocking set state
     setAnswer(randomWord(words));
     setNWrong(0);
+    // TODO: this doesn't need arrow function
     setGuessedLetters(() => new Set());
   }
-
 
   return (
       <div className="Snowman">
